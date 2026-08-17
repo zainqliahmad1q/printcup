@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Find Out What Your CURP Is Without Having the Document on Hand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B2E26;
+  --pine:#14584A;
+  --lagoon:#1D6B7C;
+  --gold:#B0851F;
+  --stamp:#9B2226;
+  --paper:#EDF1EC;
+  --paper-2:#F7F9F6;
+  --slate:#5A6B62;
+  --line:rgba(11,46,38,.14);
+  --disp:'Archivo',system-ui,sans-serif;
+  --body:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{
+  margin:0;background:var(--paper-2);color:var(--ink);
+  font-family:var(--body);font-size:18.5px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--pine);text-underline-offset:3px}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 26px}
+.narrow{max-width:790px}
+
+/* header — single line */
+.hdr{
+  position:sticky;top:0;z-index:60;background:rgba(247,249,246,.93);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:78px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink)}
+.brand-mk{
+  width:38px;height:38px;border-radius:9px;background:var(--ink);color:var(--paper-2);
+  display:grid;place-items:center;font-family:var(--mono);font-weight:600;font-size:14px;
+  letter-spacing:.5px;box-shadow:0 0 0 3px rgba(20,88,74,.13);
+}
+.brand-tx b{display:block;font-family:var(--disp);font-weight:800;font-size:17px;letter-spacing:-.4px;line-height:1.1}
+.brand-tx span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:2.4px;color:var(--slate);text-transform:uppercase;margin-top:2px}
+.nav{display:flex;align-items:center;gap:24px}
+.nav a{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;
+  text-decoration:none;color:var(--slate);transition:color .2s;
+}
+.nav a:hover{color:var(--pine)}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:7px;padding:9px 12px;font-family:var(--mono);font-size:11px;letter-spacing:1.4px;color:var(--ink);cursor:pointer}
+
+/* hero */
+.hero{position:relative;background:var(--ink);color:#E8EFE9;overflow:hidden;padding:82px 0 88px}
+.hero:before{
+  content:"";position:absolute;inset:0;opacity:.5;
+  background:repeating-linear-gradient(115deg,rgba(255,255,255,.045) 0 1px,transparent 1px 9px),
+             repeating-linear-gradient(65deg,rgba(255,255,255,.035) 0 1px,transparent 1px 11px);
+}
+.hero:after{
+  content:"";position:absolute;width:660px;height:660px;right:-240px;top:-270px;border-radius:50%;
+  background:radial-gradient(circle,rgba(29,107,124,.42),transparent 66%);
+}
+.hero .wrap{position:relative;z-index:2}
+h1{
+  font-family:var(--disp);font-weight:800;font-size:clamp(2.3rem,5.4vw,4.1rem);
+  line-height:1.02;letter-spacing:-2.2px;margin:0 0 32px;color:#fff;max-width:18ch;
+}
+.hero p{font-size:1.1rem;line-height:1.78;max-width:66ch;color:#C7D6CC;margin:0}
+.hero a{color:#F0D48A}
+.hero a:hover{color:#fff}
+
+/* key strip: what you can reconstruct vs what you can't */
+.keystrip{display:flex;flex-wrap:wrap;gap:5px;margin:48px 0 0}
+.kgrp{display:flex;gap:5px}
+.cell{
+  width:42px;height:54px;display:grid;place-items:center;border-radius:6px;
+  font-family:var(--mono);font-weight:600;font-size:19px;color:#fff;
+  border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);
+  opacity:0;transform:translateY(14px);animation:pop .55s forwards;
+}
+@keyframes pop{to{opacity:1;transform:translateY(0)}}
+.kgrp[data-c="name"] .cell{background:var(--pine);border-color:transparent}
+.kgrp[data-c="date"] .cell{background:var(--gold);border-color:transparent}
+.kgrp[data-c="rest"] .cell{
+  background:transparent;border:2px dashed rgba(255,255,255,.28);
+}
+
+/* sections */
+section{padding:86px 0}
+.band{background:var(--paper)}
+h2{
+  font-family:var(--disp);font-weight:800;font-size:clamp(1.85rem,3.8vw,2.6rem);
+  line-height:1.08;letter-spacing:-1.3px;margin:0 0 26px;max-width:24ch;
+}
+h2:before{content:"";display:block;width:52px;height:3px;background:var(--gold);margin-bottom:22px}
+.m-pine h2:before{background:var(--pine)}
+.m-lagoon h2:before{background:var(--lagoon)}
+p{margin:0 0 22px}
+p:last-child{margin-bottom:0}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+
+/* warning section */
+.warn{background:#F6EDEA;border-top:3px solid var(--stamp);border-bottom:3px solid var(--stamp)}
+.warn h2{color:var(--stamp)}
+.warn h2:before{background:var(--stamp)}
+
+/* dark bands */
+.closing{background:var(--ink);color:#D4E2D8;position:relative;overflow:hidden}
+.closing:before{
+  content:"";position:absolute;inset:0;opacity:.4;
+  background:repeating-radial-gradient(circle at 84% 42%,rgba(176,133,31,.2) 0 1px,transparent 1px 13px);
+}
+.closing .wrap{position:relative;z-index:2}
+.closing h2{color:#fff}
+.closing a{color:#F0D48A}
+.closing a:hover{color:#fff}
+
+/* footer */
+footer{background:#071E19;color:#93AA9D;padding:66px 0 32px;font-size:.95rem}
+.f-top{display:grid;grid-template-columns:1.6fr 1fr;gap:44px;padding-bottom:42px;border-bottom:1px solid rgba(255,255,255,.1)}
+footer h5{font-family:var(--mono);font-size:10.5px;letter-spacing:2.4px;text-transform:uppercase;color:#fff;margin:0 0 18px}
+footer ul{list-style:none;margin:0;padding:0}
+footer li{margin-bottom:11px}
+footer a{color:#93AA9D;text-decoration:none;transition:color .2s}
+footer a:hover{color:var(--gold)}
+.f-brand b{font-family:var(--disp);font-weight:800;font-size:1.4rem;color:#fff;letter-spacing:-.6px;display:block;margin-bottom:22px}
+.socials{display:flex;gap:11px}
+.socials a{
+  width:40px;height:40px;border:1px solid rgba(255,255,255,.18);border-radius:9px;
+  display:grid;place-items:center;transition:background .2s,border-color .2s,transform .2s;
+}
+.socials a:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-3px)}
+.socials svg{width:17px;height:17px;fill:#B7C9BD}
+.socials a:hover svg{fill:#0B2E26}
+.f-btm{padding-top:26px;font-family:var(--mono);font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:#6E8578}
+
+@media(max-width:900px){.f-top{grid-template-columns:1fr;gap:34px}}
+@media(max-width:760px){
+  body{font-size:17.5px}
+  .nav{position:fixed;inset:78px 0 auto;background:var(--paper-2);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0;padding:8px 26px 20px;display:none}
+  .nav.open{display:flex}
+  .nav a{padding:14px 0;border-bottom:1px solid var(--line)}
+  .burger{display:block}
+  section{padding:62px 0}
+  .hero{padding:60px 0 66px}
+  .cell{width:35px;height:45px;font-size:16px}
+}
+@media(max-width:420px){.cell{width:29px;height:38px;font-size:14px}}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="#top">
+      <span class="brand-mk">MX</span>
+      <span class="brand-tx"><b>CURP Gratis</b><span>RENAPO</span></span>
+    </a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav">
+      <a href="#lookup">Online Lookup</a>
+      <a href="#manual">Manual Calculation</a>
+      <a href="#where">Where Else</a>
+      <a href="#none">If Nothing Works</a>
+      <a href="#mistakes">Common Mistakes</a>
+      <a href="#memorize">Memorizing</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="hero">
+  <div class="wrap">
+    <h1>How to Find Out What Your CURP Is Without Having the Document on Hand</h1>
+    <div class="narrow">
+      <p>It's common to forget your own key, especially considering it's a combination of 18 alphanumeric characters that's practically impossible to memorize. Fortunately, there are several ways to answer the question of como saber mi curp without needing any physical document on hand at the moment.</p>
+    </div>
+
+    <div class="keystrip" aria-hidden="true">
+      <span class="kgrp" data-c="name">
+        <span class="cell">P</span><span class="cell">E</span><span class="cell">R</span><span class="cell">J</span>
+      </span>
+      <span class="kgrp" data-c="date">
+        <span class="cell">8</span><span class="cell">5</span><span class="cell">0</span><span class="cell">3</span><span class="cell">1</span><span class="cell">5</span>
+      </span>
+      <span class="kgrp" data-c="rest">
+        <span class="cell"></span><span class="cell"></span><span class="cell"></span>
+        <span class="cell"></span><span class="cell"></span><span class="cell"></span>
+        <span class="cell"></span><span class="cell"></span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<section id="lookup" class="m-pine">
+  <div class="wrap narrow">
+    <h2>The Fastest Method: The Online Lookup</h2>
+    <p>The most direct way to resolve <a href="https://curpgratis.mx/descargar-curp/">Descargar CURP Gratis PDF</a> is to go to the official RENAPO portal and enter your basic personal data: full name as it appears on your birth certificate, date of birth, sex, and state of birth. In a matter of seconds, the system will show your complete key, with no prior document needed, since the information is pulled directly from the national database.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="manual" class="band">
+  <div class="wrap narrow">
+    <h2>How to Calculate Your CURP Manually</h2>
+    <p>Although it's not the recommended method for official procedures, it's possible to understand the logic behind <a href="https://curpgratis.mx/consulta-curp/">calcular curp</a> manually, which is mainly useful for educational purposes or to verify that an existing key is correct. The formula takes the first letter of the paternal surname, the first internal vowel of that surname, the first letter of the maternal surname, and the first letter of the given name; then adds the year, month, and day of birth in numeric format; continues with the letter H or M depending on sex; adds the two letters for the state of birth; adds the first internal consonants of the surnames and name; and ends with a check digit calculated through a specific algorithm. However, this manual calculation may not exactly match the official key in cases of shared names, where the system assigns extra characters to avoid duplicates.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="where" class="m-lagoon">
+  <div class="wrap narrow">
+    <h2>Where Else You Can Find Your Already-Registered CURP</h2>
+    <p>If you've completed official procedures before, it's very likely your key already appears printed on several documents you probably still have: your voter ID (INE), your IMSS or ISSSTE affiliation record, your professional degree, your military service card, formal employment contracts, or even your pay stub if you work formally. Checking these documents before starting any lookup can save you the whole process.</p>
+  </div>
+</section>
+
+<section id="none" class="closing">
+  <div class="wrap narrow">
+    <h2>What to Do If None of These Methods Work</h2>
+    <p>If the online lookup returns no results and you don't have any document showing your key from before, the next step is to go in person to a RENAPO or Civil Registry office, bringing your original birth certificate, where staff can help you locate or, if needed, generate your key if it has never been formally assigned.</p>
+  </div>
+</section>
+
+<section id="mistakes" class="warn">
+  <div class="wrap narrow">
+    <h2>Common Mistakes When Trying to Remember the CURP</h2>
+    <p>A common mistake is confusing the CURP with the RFC or with the IMSS social-security number, three different identifiers that, although related to each other in some cases, serve different functions and have their own structures. Checking exactly which document the institution is asking you for before starting any search will avoid unnecessary confusion.</p>
+  </div>
+</section>
+
+<section id="memorize">
+  <div class="wrap narrow">
+    <h2>The Importance of Memorizing at Least Part of Your Key</h2>
+    <p>Although it's not necessary to memorize all 18 characters, many people find it useful to remember at least the first four letters (derived from their name and surnames) and the six digits corresponding to their date of birth, since these elements are the easiest to reconstruct mentally in case you don't have immediate access to the internet or any document.</p>
+  </div>
+</section>
+
+<section id="final" class="closing">
+  <div class="wrap narrow">
+    <h2>Final Recommendation</h2>
+    <p>The most reliable and fastest way to resolve any doubt about your key is always a direct lookup on the official RENAPO portal. Avoid third-party calculators that promise to automatically generate your CURP, since these tools don't always account for the exceptions and special homoclaves that the official system does consider, which can produce an incorrect key that doesn't match your official record.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <b>CURP Gratis MX</b>
+        <div class="socials">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5H16.7V4.6c-.3 0-1.3-.13-2.47-.13-2.45 0-4.13 1.5-4.13 4.24v2.19H7.4V14h2.7v8h3.4z"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M17.5 3h3.1l-6.8 7.8L21.8 21h-6.2l-4.4-5.8L6 21H2.9l7.3-8.3L2.5 3h6.4l4 5.3L17.5 3zm-1.1 16.1h1.7L7.7 4.8H5.9l10.5 14.3z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 4.6c2.4 0 2.7 0 3.6.05.9.04 1.4.2 1.7.32.43.17.74.37 1.06.7.33.32.53.63.7 1.06.12.3.28.8.32 1.7.05.9.05 1.2.05 3.6s0 2.7-.05 3.6c-.04.9-.2 1.4-.32 1.7-.17.43-.37.74-.7 1.06-.32.33-.63.53-1.06.7-.3.12-.8.28-1.7.32-.9.05-1.2.05-3.6.05s-2.7 0-3.6-.05c-.9-.04-1.4-.2-1.7-.32a2.9 2.9 0 01-1.06-.7 2.9 2.9 0 01-.7-1.06c-.12-.3-.28-.8-.32-1.7C4.6 14.7 4.6 14.4 4.6 12s0-2.7.05-3.6c.04-.9.2-1.4.32-1.7.17-.43.37-.74.7-1.06a2.9 2.9 0 011.06-.7c.3-.12.8-.28 1.7-.32.9-.05 1.2-.05 3.6-.05M12 3c-2.44 0-2.75.01-3.7.06-.96.04-1.6.2-2.18.42-.6.23-1.1.54-1.6 1.04-.5.5-.81 1-1.04 1.6-.22.57-.38 1.22-.42 2.18C3.01 9.25 3 9.56 3 12s.01 2.75.06 3.7c.04.96.2 1.6.42 2.18.23.6.54 1.1 1.04 1.6.5.5 1 .81 1.6 1.04.57.22 1.22.38 2.18.42.95.05 1.26.06 3.7.06s2.75-.01 3.7-.06c.96-.04 1.6-.2 2.18-.42.6-.23 1.1-.54 1.6-1.04.5-.5.81-1 1.04-1.6.22-.57.38-1.22.42-2.18.05-.95.06-1.26.06-3.7s-.01-2.75-.06-3.7c-.04-.96-.2-1.6-.42-2.18a4.5 4.5 0 00-1.04-1.6 4.5 4.5 0 00-1.6-1.04c-.57-.22-1.22-.38-2.18-.42C14.75 3.01 14.44 3 12 3zm0 4.38A4.62 4.62 0 1016.62 12 4.62 4.62 0 0012 7.38zm0 7.62A3 3 0 1115 12a3 3 0 01-3 3zm5.88-7.8a1.08 1.08 0 11-1.08-1.08 1.08 1.08 0 011.08 1.08z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.6 7.2s-.2-1.4-.8-2c-.75-.8-1.6-.8-2-.85C16 4.2 12 4.2 12 4.2h-.02s-4 0-6.8.15c-.4.05-1.25.05-2 .85-.6.6-.8 2-.8 2S2.2 8.8 2.2 10.5v1.6c0 1.65.2 3.3.2 3.3s.2 1.4.8 2c.75.8 1.75.78 2.2.86 1.6.15 6.8.2 6.8.2s4 0 6.8-.16c.4-.05 1.25-.05 2-.85.6-.6.8-2 .8-2s.2-1.65.2-3.3v-1.6c0-1.65-.2-3.3-.2-3.3zM10 14.3V8.9l5.15 2.72L10 14.3z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.94 5.5a1.94 1.94 0 11-3.88 0 1.94 1.94 0 013.88 0zM3.2 8.9h3.6V21H3.2V8.9zm5.9 0h3.45v1.65h.05c.48-.9 1.65-1.85 3.4-1.85 3.63 0 4.3 2.3 4.3 5.3V21h-3.6v-5.85c0-1.4-.03-3.2-2-3.2-2 0-2.3 1.52-2.3 3.1V21H9.1V8.9z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Contents</h5>
+        <ul>
+          <li><a href="#lookup">The Fastest Method: The Online Lookup</a></li>
+          <li><a href="#manual">How to Calculate Your CURP Manually</a></li>
+          <li><a href="#where">Where Else You Can Find Your Already-Registered CURP</a></li>
+          <li><a href="#none">What to Do If None of These Methods Work</a></li>
+          <li><a href="#mistakes">Common Mistakes When Trying to Remember the CURP</a></li>
+          <li><a href="#memorize">The Importance of Memorizing at Least Part of Your Key</a></li>
+          <li><a href="#final">Final Recommendation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-btm">© 2026 CURP Gratis MX</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var i=0;
+  document.querySelectorAll('.cell').forEach(function(c){
+    c.style.animationDelay=(i*0.045)+'s';i++;
+  });
+  var b=document.getElementById('burger'),n=document.getElementById('nav');
+  b.addEventListener('click',function(){
+    var o=n.classList.toggle('open');
+    b.setAttribute('aria-expanded',o);
+  });
+  n.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){n.classList.remove('open');b.setAttribute('aria-expanded',false)});
+  });
+})();
+</script>
+</body>
+</html>
+
